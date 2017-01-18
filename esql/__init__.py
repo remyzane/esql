@@ -8,8 +8,7 @@ app = application = Bottle()
 env = Environment()
 
 
-from parser import init, Processor
-
+from ql import init, parse
 init(env.config['parser']['optimize'], env.config['parser']['debug'])
 
 
@@ -19,6 +18,6 @@ def execute():
     """
     request_data = request.forms if request.method == 'POST' else request.query
     sql = request_data.get('sql')
-    return Processor.execute(sql)
+    return parse(sql)
 
-# print(Processor.execute('create table table_name.info (a string, b integer);'))
+print(parse('''select city.raw from my_index where city is not null and city = '3717' limit 1,2 order by city;'''))

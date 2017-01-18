@@ -42,6 +42,7 @@ def do_code():
     monitor = SourceCodeMonitor(restart_processor, patterns)
     observer.schedule(monitor, os.path.join(utility.workspace, 'conf'), recursive=True)
     observer.schedule(monitor, os.path.join(utility.workspace, 'esql'), recursive=True)
+    observer.schedule(monitor, os.path.join(utility.workspace, 'libs', 'EsqlParser'), recursive=True)
 
     # start monitoring
     observer.start()
