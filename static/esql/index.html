@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ESQL</title>
+
+    <link href="/static/libs/semantic-ui/semantic.min.css" rel="stylesheet">
+    <link href="/static/libs/kendo-ui/css/kendo.common-material.min.css" rel="stylesheet">
+    <link href="/static/libs/kendo-ui/css/kendo.material.min.css" rel="stylesheet">
+    <link href="esql.css" rel="stylesheet">
+
+    <!--<script src="/static/libs/jquery/jquery-3.1.1.min.js"></script>-->
+    <script src="/static/libs/jquery/jquery-2.2.4.min.js"></script>
+    <script src="/static/libs/kendo-ui/kendo.web.min.js"></script>
+    <script src="/static/libs/kendo-ui/cultures/kendo.culture.zh-CN.min.js"></script>
+    <script src="/static/libs/ace/ace.js"></script>
+    <script src="/static/libs/ace/mode-sql.js"></script>
+    <script src="/static/libs/ace/theme-tomorrow.js"></script>
+
+    <script src="esql.js"></script>
+
+</head>
+<body>
+    <div id="editor">
+-- DROP TABLE test_lxb;
+CREATE TABLE test_lxb.base(
+	reg_id STRING {index=not_analyzed},
+	stamp DATE {format='yyyy-MM-dd HH:mm:ss.SSS'},
+	_all SET enable
+) with 5, 1;
+desc test_lxb;
+insert into test_lxb.base(reg_id, stamp) values ('group1', '2016-01-01 00:00:00.000');
+insert into test_lxb.base(reg_id, stamp) values ('group1', '2016-02-01 00:00:00.000');
+insert into test_lxb.base(reg_id, stamp) values ('group2', '2016-01-01 00:00:00.000');
+insert into test_lxb.base(reg_id, stamp) values ('group2', '2016-02-01 00:00:00.000');
+flush test_lxb;
+select * from test_lxb;
+select count(*) from test_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;
+-- group1	12
+-- group2	12
+select count(*) from test_lxb where stamp >= '2016-10-12 00:00:00.000' and stamp <=  '2016-12-12 00:00:00.000' group by reg_id;
+-- group1	2
+-- group2	2
+select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '2016-12-12 00:00:00.000' group by reg_id;
+-- group1	11
+-- group2	11
+    </div>
+    <div class="toolbar">
+        <button class="ui twitter button"><i class="play icon"></i>Execute</button>
+        <button class="ui loading button">Loading</button>
+        <button class="ui twitter button"><i class="play icon"></i>Explain</button>
+    </div>
+
+    <div class="ui top attached tabular menu tabbar">
+        <div class="item active">Data Output</div>
+        <div class="item">Explain</div>
+        <div class="item">Messages</div>
+        <div class="item">History</div>
+    </div>
+    <div id="grid"></div>
+</body>
+</html>
