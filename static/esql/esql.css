@@ -14,6 +14,7 @@ body {
     margin: 10px 0 10px 0.5%;
     resize:vertical;
     overflow:auto;
+    border: 1px solid #ccc;
 }
 
 #toolbar {

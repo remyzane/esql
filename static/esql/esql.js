@@ -6,6 +6,7 @@ function window_width() {
 }
 
 function resize() {
+    $('#editor').height(window.innerHeight / 4);
     if (window_width() > 850) {
         var margin_left = 400 + (window_width() - 850) / 2;
         $('#toolbar').css('margin-left', margin_left > 800 ? 800: margin_left);
@@ -30,6 +31,7 @@ function execute(command) {
         show_loading('Explaining');
         break;
     }
+    $('#result').css('display', 'none');
 }
 
 function show_loading(msg) {
@@ -43,6 +45,7 @@ function show_loading(msg) {
 
 function show_result() {
     show_loading(null);
+    $('#result').css('display', 'block');
     $('#toolbar button.ui.button').removeClass('disabled');
 }
 
@@ -65,10 +68,10 @@ function change_result_tab(sign) {
 $(document).ready(function () {
     var Sql = ace.require('ace/mode/sql').Mode;
     var editor = ace.edit('editor');
-    editor.setTheme('ace/theme/tomorrow');
-    // editor.renderer.setOption('showLineNumbers', false);
-    editor.renderer.setShowGutter(false);
     editor.session.setMode(new Sql());
+    editor.setTheme('ace/theme/tomorrow');
+    editor.renderer.setOption('showLineNumbers', false);
+    // editor.renderer.setShowGutter(false);
 
     change_result_tab('data')
     $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
