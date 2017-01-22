@@ -6,7 +6,6 @@ function window_width() {
 }
 
 function resize() {
-    $('#editor').height(window.innerHeight / 4);
     if (window_width() > 850) {
         var margin_left = 400 + (window_width() - 850) / 2;
         $('#toolbar').css('margin-left', margin_left > 800 ? 800: margin_left);
@@ -89,6 +88,7 @@ $(document).ready(function () {
 
     resize();
     $(window).resize(resize);
+    $('#editor').height(window.innerHeight / 3);
 
      $('#elm_data').kendoGrid({
             dataSource: {
