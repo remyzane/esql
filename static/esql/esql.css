@@ -1,27 +1,44 @@
-#editor {
-    /*position: absolute;*/
+body {
+    min-width: 500px;
+}
+
+#editor, #toolbar, #tabbar, #loading, #result {
     float: left;
-    width: 1000px;
+    width: 99%;
+    margin-left: 0.5%;
+}
+
+#editor {
     height: 200px;
     font-size: 14px;
-    margin: 10px;
+    margin: 10px 0 10px 0.5%;
+    resize:vertical;
+    overflow:auto;
 }
 
-.toolbar {
-    float: left;
-    width: 1000px;
-    margin-left: 20px;
+#toolbar {
+    width: 450px;
+    margin: 0 0.5%;
 }
 
-.ui.attached.tabular.menu.tabbar {
-    float: left;
-    width: 1000px;
-    margin-left: 10px;
+#toolbar button {
+    z-index: 10000;
 }
 
-#grid {
-    float: left;
-    width: 1000px;
+#toolbar button.change-size {
+    cursor:move;
+}
+
+#result {
+    margin: 10px 0 10px 0.5%;
+}
+
+#result div, #result textarea{
+    width: 100%;
+}
+
+#loading {
+    display: none;
     height: 300px;
-    margin: 10px;
+    margin-top: 20px;
 }

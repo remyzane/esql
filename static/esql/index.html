@@ -46,18 +46,29 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
 -- group1	11
 -- group2	11
     </div>
-    <div class="toolbar">
-        <button class="ui twitter button"><i class="play icon"></i>Execute</button>
-        <button class="ui loading button">Loading</button>
-        <button class="ui twitter button"><i class="play icon"></i>Explain</button>
+    <div id="toolbar" class="ui buttons">
+        <button class="ui twitter button" onclick="execute('single')"><i class="play icon"></i>Execute</button>
+        <button class="ui twitter button" onclick="execute('batch')"><i class="forward icon"></i>Batch Execute</button>
+        <button class="ui twitter button" onclick="execute('explain')"><i class="sitemap icon"></i>Explain Only</button>
+        <button class="ui twitter icon button change-size"><i class="resize vertical icon"></i></button>
+    </div>
+    
+    <div id="tabbar" class="ui top attached tabular menu">
+        <a class="item active" id="tab_data">Data Output</a>
+        <a class="item" id="tab_message">Messages</a>
+        <a class="item" id="tab_explain">Explain</a>
+        <a class="item" id="tab_history">History</a>
     </div>
 
-    <div class="ui top attached tabular menu tabbar">
-        <div class="item active">Data Output</div>
-        <div class="item">Explain</div>
-        <div class="item">Messages</div>
-        <div class="item">History</div>
+        
+    <div id="result">
+        <div id="elm_data"></div>
+        <textarea id="elm_message">Message</textarea>
+        <textarea id="elm_explain">Explain</textarea>
+        <div id="elm_history">History</div>
     </div>
-    <div id="grid"></div>
+    <div id="loading">
+        <div class="ui big text active centered inline loader" onclick="show_result()">Loading</div>
+    </div>
 </body>
 </html>
