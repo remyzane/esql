@@ -8,7 +8,7 @@ function window_width() {
 function resize() {
     if (window_width() > 850) {
         var margin_left = 400 + (window_width() - 850) / 2;
-        $('#toolbar').css('margin-left', margin_left > 800 ? 800: margin_left);
+        $('#toolbar').css('margin-left', margin_left > 600 ? 600: margin_left);
         $('#tabbar').css('margin-top', '-2.5rem');
     } else {
         $('#toolbar').css('margin-left', '0.5%');
@@ -51,18 +51,12 @@ function show_result() {
 function change_result_tab(sign) {
     $('#tab_' + sign).addClass('active').siblings().removeClass('active');
     $('#elm_' + sign).css('display', 'block').siblings().css('display', 'none');
-    switch (sign) {
-    case 'data':
-        break;
-    case 'message':
-        break;
-    case 'explain':
-        break;
-    case 'history':
-        break;
+    if (sign === 'explain') {
+        $('#copy_curl').css('display', 'block')
+    } else {
+        $('#copy_curl').css('display', 'none')
     }
 }
-
 
 $(document).ready(function () {
     var Sql = ace.require('ace/mode/sql').Mode;
@@ -70,9 +64,20 @@ $(document).ready(function () {
     editor.session.setMode(new Sql());
     editor.setTheme('ace/theme/tomorrow');
     editor.renderer.setOption('showLineNumbers', false);
-    // editor.renderer.setShowGutter(false);
 
-    change_result_tab('data')
+    var Yaml = ace.require('ace/mode/yaml').Mode;
+    var messager = ace.edit('message');
+    messager.session.setMode(new Yaml());
+    messager.setTheme('ace/theme/tomorrow');
+    messager.renderer.setShowGutter(false);
+
+    var Json = ace.require('ace/mode/json').Mode;
+    var dsl = ace.edit('dsl');
+    dsl.session.setMode(new Json());
+    dsl.setTheme('ace/theme/tomorrow');
+    dsl.renderer.setShowGutter(false);
+
+    change_result_tab('history')     // debug only
     $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
     
     $('#toolbar button.change-size').bind('mousedown',function(e){
@@ -84,7 +89,6 @@ $(document).ready(function () {
             $('#editor').height(e.pageY - change_size_datum);
         }
     });
-
 
     resize();
     $(window).resize(resize);

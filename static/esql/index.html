@@ -16,6 +16,8 @@
     <script src="/static/libs/kendo-ui/cultures/kendo.culture.zh-CN.min.js"></script>
     <script src="/static/libs/ace/ace.js"></script>
     <script src="/static/libs/ace/mode-sql.js"></script>
+    <script src="/static/libs/ace/mode-json.js"></script>
+    <script src="/static/libs/ace/mode-yaml.js"></script>
     <script src="/static/libs/ace/theme-tomorrow.js"></script>
 
     <script src="esql.js"></script>
@@ -47,9 +49,10 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
 -- group2	11
     </div>
     <div id="toolbar" class="ui buttons">
+        <button class="ui twitter button" onclick="copy_curl()" id="copy_curl"><i class="terminal icon"></i>COPY AS CURL</button>
         <button class="ui twitter button" onclick="execute('single')"><i class="play icon"></i>Execute</button>
         <button class="ui twitter button" onclick="execute('batch')"><i class="forward icon"></i>Batch Execute</button>
-        <button class="ui twitter button" onclick="execute('explain')"><i class="sitemap icon"></i>Explain Only</button>
+        <button class="ui twitter button" onclick="execute('explain')"><i class="sitemap icon"></i>Explain</button>
         <button class="ui twitter icon button change-size"><i class="resize vertical icon"></i></button>
     </div>
     
@@ -63,9 +66,108 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
         
     <div id="result">
         <div id="elm_data"></div>
-        <textarea id="elm_message">Message</textarea>
-        <textarea id="elm_explain">Explain</textarea>
-        <div id="elm_history">History</div>
+        <div id="elm_message" style='display: none;'>
+            <div id="message">- # select count(*) from test_lxb where stamp >= '2016-10-12 00:00:00.000' and stamp <=  '2016-12-12 00:00:00.000' group by reg_id;
+    code: 0
+    state: Success
+    count: 3
+    took: 1
+    cost: 1
+- # select * from test_lxb;
+    code: 0
+    state: Success
+    count: 3
+    took: 1
+    cost: 1
+            </div>
+        </div>
+        <div id="elm_explain" style='display: none;'>
+            <div id="dsl">
+{
+    "query": {
+        "match" : {
+            "message" : "this is a test"
+        }
+    }
+}
+            </div>
+        </div>
+        <div id="elm_history" style='display: none;'>
+            <div style="width:100%; overflow:auto;">
+                <table class="ui selectable celled padded table">
+                    <tr>
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon green checkmark"></i>
+                            <span>select count(*) fromtest_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td>code:0  state:Success  count:3  took:1  cost:1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon green checkmark"></i>
+                            <span>select count(*) fromtest_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td>code:0  state:Success  count:3  took:1  cost:1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon green checkmark"></i>
+                            <span>select count(*) fromtest_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td>code:0  state:Success  count:3  took:1  cost:1</td>
+                    </tr>
+                    <tr class="negative">
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon red close"></i>
+                            <span>select count(*) fromtest_lxbxxxx where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr class="negative">
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon red close"></i>
+                            <span>select count(*) fromtest_lxbxxxx where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon green checkmark"></i>
+                            <span>select count(*) fromtest_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td>code:0  state:Success  count:3  took:1  cost:1</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 1rem;">
+                            <button class="ui circular twitter icon button"><i class="copy icon"></i></button>
+                        </td>
+                        <td>
+                            <i class="icon green checkmark"></i>
+                            <span>select count(*) fromtest_lxb where stamp <= '2016-12-12 00:00:00.000' group by reg_id;</span>
+                        </td>
+                        <td>code:0  state:Success  count:3  took:1  cost:1</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <div id="loading">
         <div class="ui big text active centered inline loader" onclick="show_result()">Loading</div>

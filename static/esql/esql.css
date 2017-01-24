@@ -38,6 +38,16 @@ body {
     width: 100%;
 }
 
+#message, #dsl {
+    width: 1000px;
+    height: 200px;
+}
+
+#elm_explain button {
+    float: right;
+    z-index: 100000000;
+    margin: -3rem 1rem 0 0;
+}
 #loading {
     display: none;
     height: 300px;
