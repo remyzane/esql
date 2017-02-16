@@ -70,14 +70,17 @@ $(document).ready(function () {
     messager.session.setMode(new Yaml());
     messager.setTheme('ace/theme/tomorrow');
     messager.renderer.setShowGutter(false);
+    messager.setOptions({readOnly:true})
 
     var Json = ace.require('ace/mode/json').Mode;
     var dsl = ace.edit('dsl');
     dsl.session.setMode(new Json());
     dsl.setTheme('ace/theme/tomorrow');
     dsl.renderer.setShowGutter(false);
+    dsl.renderer.setStyle("disabled", true)
+    dsl.setOptions({readOnly:true})
 
-    change_result_tab('history')     // debug only
+    change_result_tab('explain')     // debug only
     $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
     
     $('#toolbar button.change-size').bind('mousedown',function(e){
@@ -94,7 +97,7 @@ $(document).ready(function () {
     $(window).resize(resize);
     $('#editor').height(window.innerHeight / 3);
 
-     $('#elm_data').kendoGrid({
+     $('#data').kendoGrid({
             dataSource: {
                 data: products,
                 // schema: {
@@ -172,6 +175,123 @@ var products = [
             CategoryID : 2,
             CategoryName : 'Condiments',
             Description : 'Sweet and savory sauces, relishes, spreads, and seasonings'
+        }
+    },
+    {
+        ProductID : 10,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 11,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 12,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 13,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 14,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 15,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 16,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 17,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
+        }
+    },
+    {
+        ProductID : 18,
+        ProductName : 'Chai',
+        QuantityPerUnit : '10 boxes x 20 bags',
+        UnitPrice : 18.0000,
+        UnitsInStock : 39,
+        Discontinued : false,
+        Category : {
+            CategoryID : 1,
+            CategoryName : 'Beverages',
+            Description : 'Soft drinks, coffees, teas, beers, and ales'
         }
     }
     ];

@@ -48,6 +48,7 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
 -- group1	11
 -- group2	11
     </div>
+
     <div id="toolbar" class="ui buttons">
         <button class="ui twitter button" onclick="copy_curl()" id="copy_curl"><i class="terminal icon"></i>COPY AS CURL</button>
         <button class="ui twitter button" onclick="execute('single')"><i class="play icon"></i>Execute</button>
@@ -62,12 +63,14 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
         <a class="item" id="tab_explain">Explain</a>
         <a class="item" id="tab_history">History</a>
     </div>
-
         
     <div id="result">
-        <div id="elm_data"></div>
+
+        <div id="elm_data">
+            <div id="data" class="result-content"></div>
+        </div>
         <div id="elm_message" style='display: none;'>
-            <div id="message">- # select count(*) from test_lxb where stamp >= '2016-10-12 00:00:00.000' and stamp <=  '2016-12-12 00:00:00.000' group by reg_id;
+            <div id="message" class="result-content">- # select count(*) from test_lxb where stamp >= '2016-10-12 00:00:00.000' and stamp <=  '2016-12-12 00:00:00.000' group by reg_id;
     code: 0
     state: Success
     count: 3
@@ -79,21 +82,58 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
     count: 3
     took: 1
     cost: 1
-            </div>
+- # select * from test_lxb;
+    code: 0
+    state: Success
+    count: 3
+    took: 1
+    cost: 1
+- # select * from test_lxb;
+    code: 0
+    state: Success
+    count: 3
+    took: 1
+    cost: 1
+- # select * from test_lxb;
+    code: 0
+    state: Success
+    count: 3
+    took: 1
+    cost: 1</div>
         </div>
+
         <div id="elm_explain" style='display: none;'>
-            <div id="dsl">
-{
+            <div id="dsl" class="result-content">{
     "query": {
         "match" : {
-            "message" : "this is a test"
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match2" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match3" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match4" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match5" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match6" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match7" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "match8" : {
+            "message" : "this is a testbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
         }
     }
-}
-            </div>
+}</div>
         </div>
         <div id="elm_history" style='display: none;'>
-            <div style="width:100%; overflow:auto;">
+            <div class="result-content" style="width:100%; overflow:auto; height: 200px;">
                 <table class="ui selectable celled padded table">
                     <tr>
                         <td style="padding:0 1rem;">
@@ -170,7 +210,7 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
         </div>
     </div>
     <div id="loading">
-        <div class="ui big text active centered inline loader" onclick="show_result()">Loading</div>
+        <div class="ui big text active centered inline loader result-content" onclick="show_result()">Loading</div>
     </div>
 </body>
 </html>

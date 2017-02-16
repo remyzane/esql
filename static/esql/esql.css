@@ -2,6 +2,10 @@ body {
     min-width: 500px;
 }
 
+.ace_print-margin {
+    display: none;
+}
+
 #editor, #toolbar, #tabbar, #loading, #result {
     float: left;
     width: 99%;
@@ -38,8 +42,8 @@ body {
     width: 100%;
 }
 
-#message, #dsl {
-    width: 1000px;
+.result-content {
+    width: 100%;
     height: 200px;
 }
 

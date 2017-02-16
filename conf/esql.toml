@@ -1,9 +1,14 @@
 version = "0.0.1"                 # esql version
 
 [server]                          # elasticsearch server config
-  driver_version = 5              # elasticsearch python driver version, support 2 and 5
+  # driver_version = 5              # elasticsearch python driver version, support 2 and 5
+  # hosts = [
+  #   "10.68.23.81:9222"
+  # ]
+
+  driver_version = 2              # elasticsearch python driver version, support 2 and 5
   hosts = [
-    "10.68.23.81:9222"
+    "10.68.23.213:9200"
   ]
 
 [parser]
