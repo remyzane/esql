@@ -1,19 +1,39 @@
 
 var change_size_datum = null;
+var EDITOR_RESUTL_MIN_HIGHT = 100;
+var WINDOWS_WITH_CRITICAL_POINT = 850;
 
 function window_width() {
     return window.innerWidth > 500 ? window.innerWidth : 500;
 }
+function window_hight() {
+    return window.innerHeight > 300 ? window.innerHeight : 300;
+}
 
-function resize() {
-    if (window_width() > 850) {
-        var margin_left = 400 + (window_width() - 850) / 2;
+function set_tool_tab_bar_hight() {
+    if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
+        var margin_left = 400 + (window_width() - WINDOWS_WITH_CRITICAL_POINT) / 2;
         $('#toolbar').css('margin-left', margin_left > 600 ? 600: margin_left);
         $('#tabbar').css('margin-top', '-2.5rem');
     } else {
         $('#toolbar').css('margin-left', '0.5%');
         $('#tabbar').css('margin-top', '0.6rem');
     }
+}
+function get_tool_tab_bar_hight() {
+    if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
+        return $('#tabbar').height() + 45;
+    } else {
+        return $('#toolbar').height() + $('#tabbar').height() + 51;
+    }
+}
+
+function resize() {
+    set_tool_tab_bar_hight()
+    $('.result-content').css('height', window_hight() - $('#editor').height() - get_tool_tab_bar_hight());
+    ace.edit('editor').resize();
+    ace.edit('message').resize();
+    ace.edit('dsl').resize();
 }
 
 function execute(command) {
@@ -86,16 +106,25 @@ $(document).ready(function () {
     $('#toolbar button.change-size').bind('mousedown',function(e){
         change_size_datum = e.pageY - $('#editor').height();
      });
-    $('#toolbar button.change-size').bind('mouseup mouseout',function(){ change_size_datum = false; });
-    $('#toolbar button.change-size').bind('mousemove',function(e){
+    $('body').bind('mouseup',function(){ change_size_datum = false; });
+    $('body').bind('mousemove',function(e){
         if (change_size_datum) {
-            $('#editor').height(e.pageY - change_size_datum);
+            if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
+                var editor_max_height = window_hight() - get_tool_tab_bar_hight() - EDITOR_RESUTL_MIN_HIGHT;
+            } else {
+                var editor_max_height = window_hight() - get_tool_tab_bar_hight() - EDITOR_RESUTL_MIN_HIGHT;
+            }
+            var edit_hight = e.pageY - change_size_datum;
+            if (edit_hight < EDITOR_RESUTL_MIN_HIGHT) {
+                edit_hight = EDITOR_RESUTL_MIN_HIGHT;
+            }
+            $('#editor').height(edit_hight > editor_max_height ? editor_max_height: edit_hight);
+            resize();
         }
     });
-
-    resize();
     $(window).resize(resize);
-    $('#editor').height(window.innerHeight / 3);
+    $('#editor').height(window.innerHeight / 3 < EDITOR_RESUTL_MIN_HIGHT ? EDITOR_RESUTL_MIN_HIGHT: window.innerHeight / 3);
+    resize();
 
      $('#data').kendoGrid({
             dataSource: {
@@ -110,9 +139,9 @@ $(document).ready(function () {
                 //         }
                 //     }
                 // },
-                pageSize: 20
+                pageSize: 11
             },
-            height: 300,
+            // height: 300,
             scrollable: {'virtual': true},
             sortable: true,
             // filterable: true,
