@@ -21,7 +21,7 @@
     <script src="/static/libs/ace/theme-tomorrow.js"></script>
 
     <script src="esql.js"></script>
-
+    <script src="layout.js"></script>
 </head>
 <body>
     <div id="editor">
@@ -50,7 +50,7 @@ select count(*) from test_lxb where stamp between '2016-01-12 00:00:00.000' to '
     </div>
 
     <div id="toolbar" class="ui buttons">
-        <button class="ui twitter button" onclick="copy_curl()" id="copy_curl"><i class="terminal icon"></i>COPY AS CURL</button>
+        <button class="ui twitter button" onclick="copy_curl()" id="copy_curl"><i class="terminal icon"></i>curl</button>
         <button class="ui twitter button" onclick="execute('single')"><i class="play icon"></i>Execute</button>
         <button class="ui twitter button" onclick="execute('batch')"><i class="forward icon"></i>Batch Execute</button>
         <button class="ui twitter button" onclick="execute('explain')"><i class="sitemap icon"></i>Explain</button>

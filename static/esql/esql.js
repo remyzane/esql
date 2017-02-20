@@ -1,39 +1,21 @@
 
-var change_size_datum = null;
-var EDITOR_RESUTL_MIN_HIGHT = 100;
-var WINDOWS_WITH_CRITICAL_POINT = 850;
+$(document).ready(function () {
 
-function window_width() {
-    return window.innerWidth > 500 ? window.innerWidth : 500;
-}
-function window_hight() {
-    return window.innerHeight > 300 ? window.innerHeight : 300;
-}
+});
 
-function set_tool_tab_bar_hight() {
-    if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
-        var margin_left = 400 + (window_width() - WINDOWS_WITH_CRITICAL_POINT) / 2;
-        $('#toolbar').css('margin-left', margin_left > 600 ? 600: margin_left);
-        $('#tabbar').css('margin-top', '-2.5rem');
+function show_loading(msg) {
+    if (msg === null) {
+        $('#loading').css('display', 'none');
     } else {
-        $('#toolbar').css('margin-left', '0.5%');
-        $('#tabbar').css('margin-top', '0.6rem');
-    }
-}
-function get_tool_tab_bar_hight() {
-    if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
-        return $('#tabbar').height() + 45;
-    } else {
-        return $('#toolbar').height() + $('#tabbar').height() + 51;
+        $('#loading div.ui.loader').text(msg);
+        $('#loading').css('display', 'block');
     }
 }
 
-function resize() {
-    set_tool_tab_bar_hight()
-    $('.result-content').css('height', window_hight() - $('#editor').height() - get_tool_tab_bar_hight());
-    ace.edit('editor').resize();
-    ace.edit('message').resize();
-    ace.edit('dsl').resize();
+function show_result() {
+    show_loading(null);
+    $('#result').css('display', 'block');
+    $('#toolbar button.ui.button').removeClass('disabled');
 }
 
 function execute(command) {
@@ -52,113 +34,6 @@ function execute(command) {
     }
     $('#result').css('display', 'none');
 }
-
-function show_loading(msg) {
-    if (msg === null) {
-        $('#loading').css('display', 'none');
-    } else {
-        $('#loading div.ui.loader').text(msg);
-        $('#loading').css('display', 'block');
-    }
-}
-
-function show_result() {
-    show_loading(null);
-    $('#result').css('display', 'block');
-    $('#toolbar button.ui.button').removeClass('disabled');
-}
-
-function change_result_tab(sign) {
-    $('#tab_' + sign).addClass('active').siblings().removeClass('active');
-    $('#elm_' + sign).css('display', 'block').siblings().css('display', 'none');
-    if (sign === 'explain') {
-        $('#copy_curl').css('display', 'block')
-    } else {
-        $('#copy_curl').css('display', 'none')
-    }
-}
-
-$(document).ready(function () {
-    var Sql = ace.require('ace/mode/sql').Mode;
-    var editor = ace.edit('editor');
-    editor.session.setMode(new Sql());
-    editor.setTheme('ace/theme/tomorrow');
-    editor.renderer.setOption('showLineNumbers', false);
-
-    var Yaml = ace.require('ace/mode/yaml').Mode;
-    var messager = ace.edit('message');
-    messager.session.setMode(new Yaml());
-    messager.setTheme('ace/theme/tomorrow');
-    messager.renderer.setShowGutter(false);
-    messager.setOptions({readOnly:true})
-
-    var Json = ace.require('ace/mode/json').Mode;
-    var dsl = ace.edit('dsl');
-    dsl.session.setMode(new Json());
-    dsl.setTheme('ace/theme/tomorrow');
-    dsl.renderer.setShowGutter(false);
-    dsl.renderer.setStyle("disabled", true)
-    dsl.setOptions({readOnly:true})
-
-    change_result_tab('explain')     // debug only
-    $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
-    
-    $('#toolbar button.change-size').bind('mousedown',function(e){
-        change_size_datum = e.pageY - $('#editor').height();
-     });
-    $('body').bind('mouseup',function(){ change_size_datum = false; });
-    $('body').bind('mousemove',function(e){
-        if (change_size_datum) {
-            if (window_width() > WINDOWS_WITH_CRITICAL_POINT) {
-                var editor_max_height = window_hight() - get_tool_tab_bar_hight() - EDITOR_RESUTL_MIN_HIGHT;
-            } else {
-                var editor_max_height = window_hight() - get_tool_tab_bar_hight() - EDITOR_RESUTL_MIN_HIGHT;
-            }
-            var edit_hight = e.pageY - change_size_datum;
-            if (edit_hight < EDITOR_RESUTL_MIN_HIGHT) {
-                edit_hight = EDITOR_RESUTL_MIN_HIGHT;
-            }
-            $('#editor').height(edit_hight > editor_max_height ? editor_max_height: edit_hight);
-            resize();
-        }
-    });
-    $(window).resize(resize);
-    $('#editor').height(window.innerHeight / 3 < EDITOR_RESUTL_MIN_HIGHT ? EDITOR_RESUTL_MIN_HIGHT: window.innerHeight / 3);
-    resize();
-
-     $('#data').kendoGrid({
-            dataSource: {
-                data: products,
-                // schema: {
-                //     model: {
-                //         fields: {
-                //             ProductName: { type: 'string' },
-                //             UnitPrice: { type: 'number' },
-                //             UnitsInStock: { type: 'number' },
-                //             Discontinued: { type: 'boolean' }
-                //         }
-                //     }
-                // },
-                pageSize: 11
-            },
-            // height: 300,
-            scrollable: {'virtual': true},
-            sortable: true,
-            // filterable: true,
-            pageable: {
-                input: true,
-                numeric: false
-            },
-            // columns: {widht: '130px'}
-            columns: [
-                { field: 'ProductName', width: '430px' },
-                { field: 'UnitPrice', title: 'Unit Price', format: '{0:c}', width: '430px' },
-                { field: 'UnitsInStock', title: 'Units In Stock', width: '430px' },
-                { field: 'Discontinued', width: '430px' }
-            ]
-    });
-
-});
 
 var products = [
     {
@@ -312,7 +187,7 @@ var products = [
     },
     {
         ProductID : 18,
-        ProductName : 'Chai',
+        ProductName : 'Chaixxxx',
         QuantityPerUnit : '10 boxes x 20 bags',
         UnitPrice : 18.0000,
         UnitsInStock : 39,
