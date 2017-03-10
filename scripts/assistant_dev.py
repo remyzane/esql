@@ -7,7 +7,6 @@ import bottle
 from argparse import ArgumentParser, HelpFormatter
 
 import utility
-import esql
 
 
 class CustomizeHelpFormatter(HelpFormatter):
@@ -22,6 +21,7 @@ class CustomizeHelpFormatter(HelpFormatter):
 
 # run simple server
 def do_run():
+    import esql
     bottle.run(app=esql.app, host='0.0.0.0', port=8000)
 
 
@@ -37,6 +37,7 @@ def do_code():
     patterns = ['*.py', '*esql.toml']  # '*' is necessary, and must in the first.
     restart_processor = ServerStarter([
         # {'cmd': 'rm -rf %s/*.log' % os.path.join(utility.workspace, 'log'), 'is_daemon': False},
+        {'cmd': 'rm -rf %s/libs/EsqlParser/ql/parse/*tab.pyc' % utility.workspace, 'is_daemon': False},
         {'cmd': '%s/scripts/assistant_dev.py run' % utility.workspace, 'network_port': (8000,)}
     ])
     monitor = SourceCodeMonitor(restart_processor, patterns)

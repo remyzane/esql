@@ -4,8 +4,16 @@ import pkgutil
 from copy import deepcopy
 from importlib import import_module
 from collections import Mapping, OrderedDict
+from bottle import request
 
 POSIX = os.name != 'nt'
+
+
+def request_param(param_name):
+    if request.method == 'POST':
+        return request.forms.get(param_name)
+    else:
+        return request.query.get(param_name)
 
 
 def multiply(expression):

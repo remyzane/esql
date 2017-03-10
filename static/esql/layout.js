@@ -2,11 +2,10 @@ var change_size_datum = null;
 var EDITOR_MIN_HIGHT = 90;
 var RESUTL_MIN_HIGHT = 180;
 var WINDOWS_WITH_CRITICAL_POINT = 900;
-var current_result_tab = '';
 
 $(document).ready(function () {
     init_element();
-    change_result_tab('data')     // debug only       data   message   explain   history
+    change_result_tab('history')     // debug only       data   message   explain   history
     $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
     
     $('#toolbar button.change-size').bind('mousedown',function(e){
@@ -74,6 +73,7 @@ function resize() {
 }
 
 function change_result_tab(sign) {
+    if (is_executing) { return; }
     current_result_tab = sign;
     $('#tab_' + sign).addClass('active').siblings().removeClass('active');
     $('#elm_' + sign).css('display', 'block').siblings().css('display', 'none');
