@@ -61,6 +61,14 @@ def web():
     if sign == 'explain':
         sql = 'EXPLAIN ' + sql 
     print(sign, sql, current_line, selected_sql)
-    return sql
+    return {
+        "cols": ["age", "name"],
+        "rows": [
+            [20, "ls"],
+            [10, "zs"]
+        ],
+        "rowcount": 2,
+        "duration": 7.82014
+    }
 
 # print(parse('''select city.raw from my_index where city is not null and city = '3717' limit 1,2 order by city;'''))

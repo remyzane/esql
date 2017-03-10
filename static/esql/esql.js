@@ -4,8 +4,7 @@ var current_result_tab = '';
 $(document).ready(function () {
     $('#data').kendoGrid({
             dataSource: {
-                data: gen_data(demo_data1)
-                // data: demo_data2
+                data: demo_data2
             },
             scrollable: {'virtual': true},
             sortable: true
@@ -25,7 +24,7 @@ function gen_data(orig) {
 }
 
 function execute(command) {
-    change_result_tab('history')
+    // change_result_tab('history')
     is_executing = true;
     $('#toolbar button.ui.button').addClass('disabled');
     $('#toolbar button.ui.icon.button').removeClass('disabled');
@@ -50,7 +49,20 @@ function show_result(result, error) {
     is_executing = false;
     $('#toolbar button.ui.button').removeClass('disabled');
     $("#editor").focus();
-    
+
+    var dataSource = new kendo.data.DataSource({data: gen_data(result)});
+
+    var grid = $("#data").data("kendoGrid");
+    grid.destroy();
+    $("#data").empty();
+    $("#elm_data").append('<div id="data" class="result-content"></div>');
+    $('#data').kendoGrid({
+        dataSource: {
+            data: gen_data(result)
+        },
+        scrollable: {'virtual': true},
+        sortable: true
+    });
 }
 
 var demo_data1 = {
