@@ -1,6 +1,29 @@
 var is_executing = false;
 var current_result_tab = '';
 
+$(document).ready(function () {
+    $('#data').kendoGrid({
+            dataSource: {
+                data: gen_data(demo_data1)
+                // data: demo_data2
+            },
+            scrollable: {'virtual': true},
+            sortable: true
+    });
+});
+
+function gen_data(orig) {
+    var data = [];
+    for (var i = 0; i < orig.rowcount; i++) {
+        var row = {};
+        for (var j = 0; j < orig.cols.length; j++) {
+            row[orig.cols[j]] = orig.rows[i][j]
+        }
+        data.push(row);
+    }
+    return data
+}
+
 function execute(command) {
     change_result_tab('history')
     is_executing = true;
@@ -30,14 +53,24 @@ function show_result(result, error) {
     
 }
 
+var demo_data1 = {
+    "cols": ["age", "name"],
+    "rows": [
+        [20, "ls"],
+        [10, "zs"]
+    ],
+    "rowcount": 2,
+    "duration": 7.82014
+}
 
-var products = [
+var demo_data2 = [
     {
         ProductID : 1,
         ProductName : 'Chai',
         QuantityPerUnit : '10 boxes x 20 bags',
         UnitPrice : 18.0000,
         UnitsInStock : 39,
+        ReorderLevel : null,
         Discontinued : false,
         Category : {
             CategoryID : 1,
@@ -61,4 +94,4 @@ var products = [
             Description : 'Soft drinks, coffees, teas, beers, and ales'
         }
     }
-    ];
+];

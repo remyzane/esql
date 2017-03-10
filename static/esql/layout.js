@@ -5,7 +5,7 @@ var WINDOWS_WITH_CRITICAL_POINT = 900;
 
 $(document).ready(function () {
     init_element();
-    change_result_tab('history')     // debug only       data   message   explain   history
+    // change_result_tab('history')     // debug only       data   message   explain   history
     $('.ui.menu a.item').on('click', function() { change_result_tab(this.id.substring(4, this.id.length)); });
     
     $('#toolbar button.change-size').bind('mousedown',function(e){
@@ -106,36 +106,4 @@ function init_element() {
     dsl.renderer.setShowGutter(false);
     dsl.renderer.setStyle("disabled", true)
     dsl.setOptions({readOnly:true})
-
-    $('#data').kendoGrid({
-            dataSource: {
-                data: products,
-                // schema: {
-                //     model: {
-                //         fields: {
-                //             ProductName: { type: 'string' },
-                //             UnitPrice: { type: 'number' },
-                //             UnitsInStock: { type: 'number' },
-                //             Discontinued: { type: 'boolean' }
-                //         }
-                //     }
-                // },
-                // pageSize: 11
-            },
-            // height: 300,
-            scrollable: {'virtual': true},
-            sortable: true,
-            // filterable: true,
-            // pageable: {
-            //     input: true,
-            //     numeric: false
-            // },
-            // columns: {widht: '130px'}
-            columns: [
-                { field: 'ProductName', width: '430px' },
-                { field: 'UnitPrice', title: 'Unit Price', format: '{0:c}', width: '430px' },
-                { field: 'UnitsInStock', title: 'Units In Stock', width: '430px' },
-                { field: 'Discontinued', width: '430px' }
-            ]
-    });
 }
