@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ESQL</title>
+
+    <link href="../libs/jquery/jquery-ui.css" rel="stylesheet">
+    <link href="../libs/jq-grid/ui.jqgrid.css" rel="stylesheet">
+    <link href="esql.css" rel="stylesheet">
+
+    <script src="../libs/jquery/jquery-1.7.2.min.js"></script>
+    <script src="../libs/jq-grid/jquery.jqGrid.min.js"></script>
+    <script src="esql.js"></script>
+</head>
+<body>
+
+<div class="header">
+</div>
+
+<div class="body">
+    <div class="main">
+        <textarea id="sql"></textarea>
+        <div class="toolbar">
+            <select id="history"></select>
+            <a class="icon" href="/static/docs/esql/html/index.html" target="_blank"><img src="icon/help.png" alt="文档"/></a>
+            <a class="icon" href="javascript: layout = 'info'; resize();"><img src="icon/layout_info.png" alt="显示信息"/></a>
+            <a class="icon" href="javascript: layout = 'data'; resize();"><img src="icon/layout_data.png" alt="显示数据"/></a>
+            <a class="icon" href="javascript: layout = 'default'; resize();"><img src="icon/layout_default.png" alt="默认布局"/></a>
+            <button id="submit" onclick="do_execute()">提交</button>
+        </div>
+    </div>
+
+    <textarea id="result" readonly></textarea>
+
+    <div id="data"><table id="grid"></table></div>
+</div>
+
+</body>
+</html>

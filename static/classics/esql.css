@@ -1,0 +1,91 @@
+body {
+    margin: 3px;
+    min-width: 590px;
+}
+
+.header {
+    float: left;
+    padding: 3px 0;
+}
+.header img {
+    float:left;
+    margin: 2px 2px 0 0;
+}
+.header input, .header button {
+    float: left;
+    width: 55px;
+    margin-right: 5px;
+}
+.header #password {
+    width: 50px;
+}
+.header button  {
+    width: 43px;
+    float: right;
+}
+
+.body {
+    float: left;
+    margin: 5px 2px;
+    width: 100%;
+    height: 200px;
+}
+
+.body .main {
+    float: left;
+    width: 70%;
+    margin-right: 17px;
+}
+#sql {
+    float: left;
+    height: 180px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #999999;
+    padding: 5px;
+    resize: vertical;
+}
+
+#history {
+    width: 25px;
+    float: left;
+    font-size: 16px;
+    margin: .3em .3em 0 0;
+}
+
+.toolbar {
+    max-width: 1024px;
+}
+.toolbar a.icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+    padding: 6px 6px;
+    margin: 2px 3px;
+}
+.toolbar #submit {
+    float: right;
+    width: 10rem;
+    margin-top: .4rem;
+}
+
+.body #result {
+    float: left;
+    color: #8a4132;
+    line-height: 20px;
+    font-size: 16px;
+    padding-left: 7px;
+    border: none;
+    margin-bottom: 4px;
+}
+
+#data {
+    float: left;
+    overflow-x:auto;
+}
+
+#data em {
+    background-color: yellow;
+    color: red;
+}
