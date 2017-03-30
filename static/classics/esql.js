@@ -237,7 +237,7 @@ function show_result(result) {
     }
     set_history();
 
-    $("#result").text("count:" + result.count + " took:" + result.took + " cost:" + result.cost + " " + result.state + "\n\n" + result.message);
+    $("#result").text("total:" + result.total + " took:" + result.took);
 
     var config = {
         datatype: "local",
@@ -246,19 +246,32 @@ function show_result(result) {
         colNames: [],
         colModel: []
     };
-    column_count = 0;
-    for (key in result.data[0]) {
-        config.colNames[column_count] = key;
-        config.colModel[column_count] = {name: key, index: key, sorttype: "int"};
-        column_count++;
+    column_count = result.cols.length;
+    for (index in result.cols) {
+        config.colNames[index] = result.cols[index];
+        config.colModel[index] = {name: result.cols[index], index: result.cols[index], sorttype: "int"};
     }
+
     grid = $("#grid").jqGrid(config);
     set_grid_size();
-    for (var i = 0; i <= result.data.length; i++) {
-        for (key in result.data[i]) {
-            result.data[i][key] = escape_char(result.data[i][key]);
+    var data = [];
+
+    for (var row_index in result.rows) {
+        var row = result.rows[row_index];
+        var item = {};
+        for (var index in result.cols) {
+            console.log();
+            item[result.cols[index]] = row[index];
         }
-        $("#grid").jqGrid('addRowData', i + 1, result.data[i]);
+        data.push(item);
+    }
+
+    console.log(data);
+    for (var i = 0; i <= data.length; i++) {
+        for (key in data[i]) {
+            data[i][key] = escape_char(data[i][key]);
+        }
+        $("#grid").jqGrid('addRowData', i + 1, data[i]);
     }
     $("#submit").show();
 }
