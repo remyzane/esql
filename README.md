@@ -3,7 +3,6 @@ get source:
 
 git clone https://github.com/remyzane/esql.git
 
-cd esql
 
 git submodule init libs/EsqlParser/
 
@@ -12,7 +11,8 @@ git submodule update
 
 install requirements in python3:
 
-pip3 install -r docs/requirements-prd.txt 
+pip3 install -r docs/requirements-prd.txt
+
 pip3 install -r docs/requirements-dev.txt 
 
 
