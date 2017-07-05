@@ -15,13 +15,13 @@ from ql import init, parse
 from ql.dsl.Query import Query
 from ql.parse.parser import TK
 from ql.dsl.Response import response
-init(env.config['parser']['optimize'], env.config['parser']['debug'])
+# init(env.config['parser']['optimize'], env.config['parser']['debug'])
 
 
 @app.route('/')
 def index():
-    # redirect("/static/esql/index.html")
-    redirect("/static/classics/index.html")
+    redirect("/static/esql/index.html")
+    # redirect("/static/classics/index.html")
 
 
 @app.route('/static/<filepath:path>')

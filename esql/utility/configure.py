@@ -27,11 +27,11 @@ class Environment(object):
 
         self.set_libs_path()
         from elasticsearch import Elasticsearch
-        self.es = Elasticsearch(self.es_hosts)
+        # self.es = Elasticsearch(self.es_hosts)
 
         self.es_version = None
         self.es_version_major = None
-        self.get_elastic_version()
+        # self.get_elastic_version()
 
     def conf_elastic(self):
         self.es_driver_version = self.config['server']['driver_version']
