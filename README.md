@@ -3,6 +3,7 @@ get source:
 
 git clone https://github.com/remyzane/esql.git
 
+(in esql directory)
 
 git submodule init libs/EsqlParser/
 
